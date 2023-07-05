@@ -111,3 +111,5 @@ const product2 = productManager.getProductById(2);
 console.log('Producto con ID 2: ', product2);
 
 console.log('Lista de productos después de eliminar: ', productManager.getProducts());
+
+module.exports = ProductManager;
