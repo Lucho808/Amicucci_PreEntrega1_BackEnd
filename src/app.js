@@ -5,15 +5,15 @@ const app = express();
 const productManager = new ProductManager('productos.json');
 const port = 8080;
 
-app.get('/products', (req, res) => {
+app.get('/products', async (req, res) => {
   const limit = req.query.limit ? parseInt(req.query.limit) : undefined;
-  const products = limit ? productManager.getProducts().slice(0, limit) : productManager.getProducts();
+  const products = limit ? (await productManager.getProducts()).slice(0, limit) : await productManager.getProducts();
   res.json(products);
 });
 
-app.get('/products/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const product = productManager.getProductById(id);
+app.get('/products/:pid', async (req, res) => {
+  const pid = parseInt(req.params.pid);
+  const product = await productManager.getProductById(pid);
   if (product) {
     res.json(product);
   } else {
